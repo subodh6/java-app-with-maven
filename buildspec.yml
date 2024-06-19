@@ -1,0 +1,12 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo "installing java"
+      - sudo yum install -y java-17-amazon-corretto-17.0.11+9-1.amzn2023.1.x86_64
+      - sudo yum install maven -y
+  build: 
+    commands:
+      - echo "test mvn"
+      - mvn --version
+      - mvn clean package
