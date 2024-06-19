@@ -1,13 +1,30 @@
 version: 0.2
+
 phases:
   install:
+    runtime-versions:
+      java: corretto17
     commands:
-      - echo "installing java"
+      - echo "Installing Java"
       - sudo yum install -y java-17-amazon-corretto-17.0.11+9-1.amzn2023.1.x86_64
       - sudo yum install maven -y
-  build: 
+      - npm install -g snyk   # Install snyk CLI
+      - sudo yum install -y jq
+
+  pre_build:
     commands:
-      - echo "test mvn"
+      - echo "Fetching Snyk API token from AWS Secrets Manager"
+      - SNYK_TOKEN=$(aws secretsmanager get-secret-value --secret-id snyk1 --query SecretString --output text | jq -r '.snyk_token')
+      - echo "Setting Snyk API token as environment variable"
+      - export SNYK_TOKEN
+      - echo "Authenticating Snyk..."
+      - snyk auth $SNYK_TOKEN
+
+  build:
+    commands:
+      - echo "Testing with Maven"
       - mvn --version
-      - cd  my-app
+      - cd my-app
       - mvn clean package
+      - echo "Running Snyk test"
+      - snyk test
