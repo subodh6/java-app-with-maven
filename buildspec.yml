@@ -24,7 +24,7 @@ phases:
     commands:
       - echo "Testing with Maven"
       - mvn --version
-      - cd my-app
+      # - cd my-app
       - mvn clean package
       - echo "Running Snyk test"
       - snyk test
