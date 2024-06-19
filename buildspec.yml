@@ -9,4 +9,5 @@ phases:
     commands:
       - echo "test mvn"
       - mvn --version
+      - cd  my-app
       - mvn clean package
