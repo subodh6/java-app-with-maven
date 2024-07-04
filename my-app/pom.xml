@@ -28,7 +28,7 @@
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
-      <version>3.2.1</version> <!-- This version has known vulnerabilities -->
+      <version>3.2.2</version> <!-- This version has known vulnerabilities -->
     </dependency>
   </dependencies>
 
