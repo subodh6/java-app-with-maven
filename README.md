@@ -1,2 +1,2 @@
 # java-app-with-maven
-sample java project with maven
+sample java project with  maven
